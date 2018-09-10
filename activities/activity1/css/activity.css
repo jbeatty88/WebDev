@@ -1,0 +1,22 @@
+h1{
+    color:blue;
+    
+}
+h2 {
+    color: red;
+
+}
+
+#blackyellow {
+    background-color: black;
+    color: yellow;
+}
+
+#yellowblack {
+    background-color: yellow;
+    color: black;
+}
+
+.div {
+    text-align: center;
+}
