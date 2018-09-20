@@ -1,0 +1,62 @@
+
+  .center {
+    margin: 525px;
+    margin-top: 0%;
+    height: 100px;;
+    width: 900px;
+    opacity: .2;
+  }
+  .container {
+    display: flex;
+  }
+
+  .center:hover {
+    opacity: .7;
+  }
+  body {
+    font-family: 'poor story', cursive;
+    background-image: url('https://lonelyplanetimages.imgix.net/a/g/hi/t/8cd7fd61528d74edcc430c65c904a113-thailand.jpeg?sharp=10&vib=20&w=1200');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+  }
+
+
+ #flag1, #flag2, #flag11, #flag12 {
+   background-color: red;
+ }
+ 
+ #flag3, #flag4, #flag10, #flag9 {
+   background-color: whitesmoke;
+ }
+ #flag5, #flag6, #flag7, #flag8 {
+   background-color: darkblue;
+ }
+
+  .box {
+    flex: 1 1 500px;
+    color: black;
+    padding: 20px;
+    transition: 0.1s background;
+  } 
+  #flag5:hover {
+    background-color:blue;
+  }
+  #flag1:hover {
+      background-color: darkred;
+  }
+  #flag3:hover {
+    background-color: gainsboro;
+}
+  li {
+    font-size: 30px;
+  }
+
+  .instructions {
+    padding-left: 600px;
+    padding-top: 50px;
+  }
+  #changer {
+      color: rgba(0, 0, 0, alpha)
+  }
+  
