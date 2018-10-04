@@ -1,0 +1,12 @@
+body {
+    background-color: whitesmoke !important;
+    color: black;
+    font-family: 'Poor Story', cursive !important;
+}
+
+#lyricCanvas {
+    text-align: center !important;
+    font-size: 24px;
+}
+
+
