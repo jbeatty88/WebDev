@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Let's Sing</title>
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet"> 
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script>
+    /* global $ */
+    $(function() {
+        function jsonEscape(str)  {
+            return str.replace(/\n/g, "<br>").replace(/\r/g, " ").replace(/\t/g, "    ");
+        }
+        $("#getLyricsButton").on("click", function() {
+            var artistName = $("#artistNameInput").val();
+            var songName = $("#songNameInput").val();
+            var lyricUrl = "https://api.lyrics.ovh/v1/";
+            lyricUrl += artistName;
+            lyricUrl += "/";
+            lyricUrl += songName;
+
+            console.log(lyricUrl);
+            $.ajax({
+                url : lyricUrl,
+                crossDomain : true,
+                dataType : "json",
+                success : function(data) {
+                    
+                    var lyrics = "<p>";
+                    var lyrics = data['lyrics'];
+                    lyrics += "</p>";
+                    console.log(lyrics);
+                    lyrics = jsonEscape(lyrics);
+                    console.log(lyrics);
+                    $("#lyricCanvas").append(lyrics);
+                } 
+            });
+
+        })
+    });
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <form class="form-inline">
+            <button class="btn btn-outline-success" type="button"><a style = "color: lightgreen" href="https://www.spotify.com/us/">Spotify</a></button>
+            <button class="btn btn-sm btn-outline-danger" type="button"><a style = "color: lightcoral" href="https://www.youtube.com/">YouTube</a></button>
+            
+        </form>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="display-4 text-center">Let's sing a song!</h1>
+        <hr class="my-4">
+        <span class="d-flex justify-content-center">
+            <input type="text" placeholder="Artist Name" id="artistNameInput">
+            <input class="" type="text" placeholder="Song Name" id="songNameInput">
+            <button type="button" class="btn btn-outline-dark" id="getLyricsButton">Get Lyrics</button>
+        </span>    
+    </div>
+
+
+    <div id="lyricCanvas"></div> 
+ 
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
