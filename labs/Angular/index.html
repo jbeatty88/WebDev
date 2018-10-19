@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+  <!-- <script src="app.js"></script> -->
   <script src="app.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <link rel="stylesheet" href="/home/joshbeatty/Projects/WebDev/labs/Angular/main.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <!--API KEY: 0c62f553-bd83-4f1c-add1-4675368af5c6 recreation.gov--> 
+<!-- OR 52ed2f35-ba99-4fec-89e9-21572d23e9fb -->
 <body>
     <header>
         <nav class="green darken-1">
@@ -28,12 +32,37 @@
     
     
     
-    <div ng-app="app" ng-controller="myCtrl">
-        <input class="edit" type="text" ng-model="form"
-            ng-keyup="onup(form)"/>
-            <div>
-                {{ gitstuff }}
+    <div ng-app="app" ng-controller="myCtrl" ng-init='showme=true'>
+        <form name = 'campsite' ng-submit='getCampsite(campsite.name)' ng-onup='onup(campsite)'>
+            <input class="edit" type="text" ng-model="name" placeholder="Where do you want to go camping?"/>
+            <button class="btn waves-effect waves-light green darken-1" ng-click='showme=false' type="submit" name="action">let's Go<i class="material-icons right"></i></button>
+        </form>
+        <div class="container valign-wrapper" ng-show='showme'>
+            <div ng-repeat='campground in campgrounds'>
+                {{campground}}, <br>
             </div>
+        </div>
+        <div class="container center" ng-hide='showme'>
+            <div class="row">
+                <div class="col s12 m7">
+                    <div class="card">
+                        <div class="card-panel hoverable">
+                            <div class="card-image">
+                                <img src="{{ campsiteImg }}">
+                                <span class="card-title">{{ campsiteName }}</span>
+                            </div>
+                            <div class="card-content">
+                                <p> {{ description }} </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{ campsiteLink }}"> {{ campsiteName }} </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
     
 
