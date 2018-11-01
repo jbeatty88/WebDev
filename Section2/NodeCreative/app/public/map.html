@@ -1,15 +1,113 @@
 <html>
+
 <head>
-  <!-- Plotly.js -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script type="text/javascript" src="javascripts/map.js"></script>
+    <meta charset="utf-8" />
 </head>
+
 <body>
-<!-- Plotly chart will be drawn inside this DIV -->
-<div id="graphDiv"></div>
-  <script>
-  /* JAVASCRIPT CODE GOES HERE */
-  </script>
-</div>
+    <script type="text/javascript" src="javascripts/plotlyjs-bundle.js"></script>
+    <script type="text/javascript" src="javascripts/figure.js"></script>
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
+     <a href="#" id = "message" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover"></a>
+    <div id="cbe825f9-dfb5-469c-9768-eb88bf9b7eec" style="width: 100%; height: 100%;" class="plotly-graph-div"></div>
+    <script type="text/javascript">
+        (function () {
+            window.PLOTLYENV = { 'BASE_URL': 'https://plot.ly' };
+
+            var gd = document.getElementById('cbe825f9-dfb5-469c-9768-eb88bf9b7eec')
+            var resizeDebounce = null;
+
+            function resizePlot() {
+                var bb = gd.getBoundingClientRect();
+                Plotly.relayout(gd, {
+                    width: bb.width,
+                    height: bb.height
+                });
+            }
+            window.addEventListener('resize', function () {
+                if (resizeDebounce) {
+                    window.clearTimeout(resizeDebounce);
+                }
+                resizeDebounce = window.setTimeout(resizePlot, 100);
+            });
+
+            Plotly.plot(gd, {
+                data: figure.data,
+                layout: figure.layout,
+                frames: figure.frames,
+                config: { "mapboxAccessToken": "pk.eyJ1IjoiY2hyaWRkeXAiLCJhIjoiY2lxMnVvdm5iMDA4dnhsbTQ5aHJzcGs0MyJ9.X9o_rzNLNesDxdra4neC_A", "linkText": "Export to plot.ly", "showLink": true }
+            });
+
+            gd.on('plotly_click', function (data) {
+                console.log(data.points[0]);
+                var url = "/powderline?lat=" + data.points[0].lat + "&lng=" + data.points[0].lon;
+                console.log(url);
+                $.getJSON(url, function(data) 
+                {
+                    if(data[0] != null)
+                    {
+                        var name = data[0].station_information.name;
+                        var lat = data[0].station_information.location.lat;
+                        var lng = data[0].station_information.location.lng;
+                        var elevation = data[0].station_information.elevation;
+                        var lol = data[0]["data"];
+                        // var lol = data[0].Data;
+                        var temperature = "";
+                        var snow_depth = "";
+                        var snow_change = "";
+                        
+                        snow_depth = lol[lol.length-1]["Snow Depth (in)"];
+                        temperature = lol[lol.length-1]["Observed Air Temperature (degrees farenheit)"];
+                        snow_change = lol[lol.length-1]["Change In Snow Depth (in)"];
+                        
+                        console.log(lol);
+                        console.log(lat);
+                        console.log(lng);
+                        console.log(data[0].station_information);
+                        
+                        
+                        if(snow_depth == null)
+                            snow_depth = "N/A";
+                        else
+                            snow_depth += " in";
+                        if(snow_change == null)
+                            snow_change = "N/A";
+                        else
+                            snow_change += " in";
+                        
+                        temperature += " F"
+                        
+                        var string = name;
+                        // string += "\nLat: " + lat;
+                        // string += "\nLng: " + lng;
+                        string += "\nElevation: " + elevation;
+                        string += "\nTemperature: " + temperature;
+                        string += "\nSnow Depth: " + snow_depth;
+                        // string += "\nSnow Change: " + snow_change;
+                        
+                        $('#message').attr('data-content', string);
+                        // $('#message').html("<p><strong>" + name + "</strong>" + ": "  + string + "</p>");
+                
+                        var whydoesntBYUgiveusfallbreak = document.getElementById("message");
+                        whydoesntBYUgiveusfallbreak.click();
+                    }     
+                }); //end of JSON
+            }); // end of gd.on
+        }());// end of function 
+        
+         $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+});
+        
+        // ############################
+        // place this in html part 
+        // <a href="#" id = "message" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover"></a>
+    </script>
 </body>
+
 </html>

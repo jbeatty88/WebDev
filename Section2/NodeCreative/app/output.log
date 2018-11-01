@@ -1,0 +1,16 @@
+nohup: ignoring input
+[0mGET / [36m304 [0m6.495 ms - -[0m
+[0mGET / [36m304 [0m1.348 ms - -[0m
+[0mGET /map.html [36m304 [0m1.737 ms - -[0m
+[0mGET /javascripts/plotlyjs-bundle.js [36m304 [0m1.358 ms - -[0m
+[0mGET /javascripts/figure.js [32m200 [0m3.906 ms - 111806[0m
+http://api.powderlin.es/closest_stations?lat=41.91582&lng=-113.41158&data=true&days=3&count=1
+piped
+[0mGET /powderline?lat=41.91582&lng=-113.41158 [32m200 [0m1023.548 ms - 1022[0m
+[0mGET / [36m304 [0m0.521 ms - -[0m
+[0mGET /map.html [36m304 [0m0.398 ms - -[0m
+[0mGET /javascripts/plotlyjs-bundle.js [36m304 [0m0.730 ms - -[0m
+[0mGET /javascripts/figure.js [36m304 [0m0.573 ms - -[0m
+http://api.powderlin.es/closest_stations?lat=41.88573&lng=-111.56918&data=true&days=3&count=1
+piped
+[0mGET /powderline?lat=41.88573&lng=-111.56918 [32m200 [0m984.916 ms - 1020[0m
